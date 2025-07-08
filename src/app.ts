@@ -1,6 +1,6 @@
 import cron from 'node-cron';
 import { ACCOUNT_MAPS, CONFIG, ITEMS_MAP } from './config';
-import { type Account, getAccountBalances, type PlaidBalanceResponse } from './services/plaid';
+import { type Account, getAccountBalances } from './services/plaid';
 import { type CellUpdate, updateSheetCells } from './services/sheets';
 import { getDepression } from './services/usdcad';
 
