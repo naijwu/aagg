@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "tsc && node --env-file=.env dist/app.js",
     "build": "tsc",
-    "dev": "tsc-watch --onsuccess \"node dist/app.js\""
+    "dev": "tsc-watch --onsuccess \"node --env-file=.env && node dist/app.js\""
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,9 @@
   "dependencies": {
     "@tsconfig/node22": "^22.0.2",
     "@types/node": "^24.0.10",
+    "axios": "^1.10.0",
+    "googleapis": "^150.0.1",
+    "node-cron": "^4.2.0",
     "tsc-watch": "^7.1.1",
     "typescript": "^5.8.3"
   }
