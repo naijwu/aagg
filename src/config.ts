@@ -19,7 +19,7 @@ export type AccountCellMap = {
   class: "A" | "L"; // A: asset, L: liability (adds a '-' to `balance` value if a liability)
   target: string; // where the updated balance will go
   update: string; // where the "last updated" will go
-} 
+}
 
 const accountsPath = path.join(__dirname, '../accounts.json');
 const accountsData = JSON.parse(fs.readFileSync(accountsPath, 'utf8'));

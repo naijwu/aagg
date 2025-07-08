@@ -7,6 +7,7 @@ import { getDepression } from './services/usdcad';
 let USD_TO_CAD = 1;
 
 // runs 4pm on M, W, F
+console.log("I think we're up")
 cron.schedule('0 16 * * 1,3,5', async () => {
   try {
     console.log('Running updater...');
@@ -23,9 +24,7 @@ const update = async () => {
   for (const [name, access_token] of Object.entries(ITEMS_MAP)) {
     try {
       if (!access_token) throw new Error("No access token for given item/institution");
-      const balance = await getAccountBalances({
-        access_token
-      });
+      const balance = await getAccountBalances(access_token);
 
       const accounts = balance.accounts;
       if (!accounts || accounts?.length == 0) throw new Error("No accounts were found");
@@ -45,7 +44,7 @@ const update = async () => {
 /**
  * 
  * @param accounts - the accounts (chequing, investment, etc.) of the Plaid item (bank)
- * @returns 
+ * @returns an array of cell update data ready for the sheets api
  */
 const parseAccountsToCells = (accounts: Account[]): CellUpdate[] => {
   const cellUpdates: CellUpdate[] = [];

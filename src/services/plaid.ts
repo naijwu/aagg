@@ -5,12 +5,6 @@ const PLAID_API_URL = `${CONFIG.PLAID_API_URL}/accounts/balance/get`;
 const PLAID_CLIENT_ID = CONFIG.PLAID_CLIENT_ID;
 const PLAID_SECRET = CONFIG.PLAID_SECRET;
 
-export interface PlaidBalanceRequest {
-  client_id: string;
-  secret: string;
-  access_token: string;
-}
-
 export interface Account {
   account_id: string;
   balances: {
@@ -44,13 +38,12 @@ export interface PlaidBalanceResponse {
 }
 
 export async function getAccountBalances(
-  credentials?: Partial<PlaidBalanceRequest>
+  access_token: string
 ): Promise<PlaidBalanceResponse> {
   const response = await axios.post<PlaidBalanceResponse>(PLAID_API_URL, {
     client_id: PLAID_CLIENT_ID,
     secret: PLAID_SECRET,
-    access_token: process.env.PLAID_ENV_URL,
-    ...(credentials ?? {})
+    access_token
   }, {
     headers: {
       'Content-Type': 'application/json',
