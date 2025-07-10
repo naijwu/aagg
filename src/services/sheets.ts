@@ -9,14 +9,13 @@ export interface CellUpdate {
 }
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(__dirname, '../credentials.json'),
+  keyFile: path.join(__dirname, '../../credentials.json'),
   scopes: [
     'https://www.googleapis.com/auth/spreadsheets'
   ],
 });
 
 export async function updateSheetCells(updates: CellUpdate[]): Promise<void> {
-
   const sheets = google.sheets({ version: 'v4', auth });
 
   await sheets.spreadsheets.values.batchUpdate({
