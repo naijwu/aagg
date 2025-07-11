@@ -1,4 +1,3 @@
-import cron from 'node-cron';
 import { ACCOUNT_MAPS, CONFIG, ITEMS_MAP } from './config';
 import { type Account, getAccountBalances } from './services/plaid';
 import { type CellUpdate, updateSheetCells } from './services/sheets';
@@ -6,9 +5,7 @@ import { getDepression } from './services/usdcad';
 
 let USD_TO_CAD = 1;
 
-// runs 4pm on M, W, F
-console.log("I think we're up")
-cron.schedule('0 16 * * 1,3,5', async () => {
+export const main = async () => {
   try {
     console.log('Running updater...');
     USD_TO_CAD = await getDepression();
@@ -17,7 +14,7 @@ cron.schedule('0 16 * * 1,3,5', async () => {
   } catch (err) {
     console.error('Update failed:', err);
   }
-});
+}
 
 const update = async () => {
   // updating by item because 1) plaid is more finnicky than sheets and 2) to keep it simple
